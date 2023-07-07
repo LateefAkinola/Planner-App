@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 const WeatherWidget = () => {
@@ -67,7 +69,10 @@ const WeatherWidget = () => {
     <div style={styles.weatherWidget}>
       {weatherData ? (
         <div style={styles.currentWeather}>
-          <h2 style={styles.city}>{weatherData.name}</h2>
+          <div style={styles.city}>
+            <FontAwesomeIcon icon={faMapMarkerAlt} style={styles.locationIcon} />
+            {weatherData.name}
+          </div>
           <span style={styles.date}>
           {new Date().toLocaleDateString('en-US', {
             weekday: 'long',
@@ -159,6 +164,9 @@ const styles = {
   currentWeather: {
     marginBottom: '20px',
   },
+  locationIcon: {
+    marginRight: '5px',
+  },  
   city: {
     fontSize: '26px',
     fontWeight: 'bold',
