@@ -1,5 +1,6 @@
 # Planner-App
 
+## How the Code Works:
 - **Weather Data Fetching:**
   - The `fetchWeatherData` function is responsible for fetching the current weather data from the ``OpenWeatherMap API``.
   - It takes in the `latitude` and `longitude` parameters, which are obtained either from the user's geolocation.
@@ -19,12 +20,12 @@
 
 
 - **Geolocation:**
-  - The component uses the `navigator.geolocation` API to obtain the user's current geolocation coordinates.
+  - The component uses the `navigator.geolocation` API to obtain the user's current geolocation coordinates. If geolocation is not available, it falls back to the default city (`London`)
   - The `getCurrentPosition` method is called with two callback functions: `handleLocationSuccess` and `handleLocationError`.
   - If the user grants permission and the geolocation is successfully obtained, the `handleLocationSuccess` function is called.
   - Inside `handleLocationSuccess`, the `latitude` and `longitude` coordinates are extracted from the `position.coords` object.
   - The `fetchWeatherData` and `fetchForecastData` functions are then called with the obtained coordinates to fetch the weather and forecast data accordingly.
-  - If there is an error obtaining the geolocation or the user denies permission, the `handleLocationError` function is called, and an error message is logged to the console using `console.error`.
+  - If there is an error obtaining the geolocation or the user denies permission, the `handleLocationError` function is called, an error message is logged to the console using `console.error`, and it falls back to the default city (`London`) by calling the `fetchWeatherData` and `fetchForecastData` functions with the default city name.
   - The `useEffect` hook is used to execute this geolocation logic when the component mounts.
   - It fetches the initial weather and forecast data based on the user's geolocation using `getCurrentPosition`.
   - Additionally, a periodic data refresh is set up using `setInterval` to automatically fetch updated weather and forecast data at regular intervals.
@@ -39,35 +40,15 @@
 
 - **Rendering the Widget:**
   - Inside the `return` statement, the JSX code defines the structure and appearance of the weather widget.
-  - The widget is enclosed within a `<div>` element with the `styles.weatherWidget` style applied to it.
   - Conditionally rendered content is used to display different states of the widget:
-    - If `weatherData` exists, the current weather information is displayed, including the city name, date, temperature, weather description, humidity, wind speed, and air pressure.
-    - If `forecastData` exists, the forecast section is displayed, showing the forecast for the next three days, including the dates and temperatures.
+    - If `weatherData` exists, the current weather information is displayed, including the `city name`, `date`, `temperature`, `weather description`, `humidity`, `wind speed`, and `air pressure`.
+    - If `forecastData` exists, the forecast section is displayed, showing the forecast for the `next three days`, including the `dates` and `temperatures`.
     - If `weatherData` or `forecastData` is not available, a loading message is displayed.
   - The styles for different elements within the widget are defined using the `styles` object.
+  
 - **Customization:**
   - The appearance of the widget can be customized by modifying the CSS styles defined in the `styles` object.
-  - You can adjust the colors, font sizes, margins, and other properties to match the design of your planner app.
-- **Usage:**
-  - To use the Weather Widget component, integrate it into your planner app by including `<WeatherWidget />` in the desired location where you want to display the weather information.
-  - The widget will automatically fetch the weather data and forecast based on the user's geolocation. If geolocation is not available, it falls back to the default city (Lagos).
-  - The weather information, including the current weather and forecast, will be displayed in a user-friendly format.
-  - You can further customize the widget's appearance by modifying the provided styles or adding additional styling to match your app's design.
-  - Ensure that the necessary dependencies, including React and Axios, are installed in your project.
+  - You can adjust the colors, font sizes, margins, and other properties to match the design of the planner app.
 
 
 
-
-
-
-- **Component Mounting and Rendering:**
-  - The `useEffect` hook is used to handle the component's mounting and fetching of weather and forecast data.
-  - When the component mounts, the `useEffect` hook is triggered.
-  - It calls the `navigator.geolocation.getCurrentPosition` function to obtain the user's current location.
-  - The `handleLocationSuccess` and `handleLocationError` functions are passed as success and error callbacks to the geolocation API.
-  - If the user's location is successfully obtained, the `handleLocationSuccess` function is called, which fetches the weather and forecast data for that location.
-  - The weather and forecast data are stored in the component's state variables (`weatherData` and `forecastData`) using the `setWeatherData` and `setForecastData` functions.
-  - The JSX code in the `return` statement is rendered, displaying the weather widget based on the available data in the component's state.
-  - If the weather data is available, it is displayed along with the current date, temperature, weather icon, humidity, wind speed, and air pressure.
-  - If the forecast data is available, it is displayed as a 3-day forecast with the respective dates and temperatures.
-  - If the weather or forecast data is not available, a loading message is displayed.
