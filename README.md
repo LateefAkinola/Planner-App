@@ -1,10 +1,10 @@
 
-# Weather Widget in the Planner App
-Tasked to create a custom widget in addition to an existing planner App
-![Capture11](https://github.com/LateefAkinola/Planner-App/assets/105966848/c2ecc140-0772-4267-bd6c-5feef56e33e9)
+# Custom Widget in the Planner App
+Tasked to create a custom widget in addition to an existing planner App, so I added a Weather Widget.
 
-![Screenshot (377)](https://github.com/LateefAkinola/Planner-App/assets/105966848/f69d7cd8-4f67-44d1-8c2a-5c6d1b378bdd)
 ## Why add a Weather Widget in the Planner App?
+
+![Screenshot (379)](https://github.com/LateefAkinola/Planner-App/assets/105966848/95c6b6ce-23c2-4f5d-8245-f82085d24ed3)
 
 - The Weather Widget is an appropriate addition to the Planner App as it provides users with valuable weather information that can enhance their planning and scheduling activities.
 - Weather conditions can significantly impact daily plans, events, and outdoor activities, making it essential to have real-time weather updates conveniently accessible within the Planner App for users to stay informed and make informed decisions.
