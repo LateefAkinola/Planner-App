@@ -1,4 +1,39 @@
-# Planner-App
+# Weather Widget in the Planner App
+
+
+## Why add a Weather Widget in the Planner App?
+
+- The Weather Widget is an appropriate addition to the Planner App as it provides users with valuable weather information that can enhance their planning and scheduling activities. Weather conditions can significantly impact daily plans, events, and outdoor activities, making it essential to have real-time weather updates conveniently accessible within the Planner App.
+- The Weather Widget in the Planner App retrieves and displays current weather data and a three-day forecast for a selected location. The widget utilizes the OpenWeatherMap API to fetch weather information such as temperature, weather description, humidity, wind speed, and air pressure.
+
+### Benefits of the Weather Widget in the Planner App
+
+The Weather Widget offers several advantages to users of the Planner App:
+
+- **Enhanced Planning**: Users can make more informed decisions and plan their activities effectively by considering the current weather conditions and forecast.
+- **Seamless Integration**: The widget seamlessly integrates within the Planner App, providing a unified user experience without the need for switching between different applications or websites.
+- **Real-time Updates**: The widget automatically updates the weather information at regular intervals, ensuring that users have access to the latest data.
+- **Location Flexibility**: Users can easily switch between locations by selecting different cities from the dropdown menu or using the search feature.
+- **Visual Representation**: The weather icons used in the widget provide a visually appealing representation of the weather conditions, making it easy to grasp the information at a glance.
+
+By incorporating the Weather Widget into the Planner App, users can stay informed about the weather conditions that may impact their plans, enabling them to make adjustments and ensure a smooth and enjoyable planning experience.
+
+## How to Use the Weather Widget
+
+1. **Initial Display**: When the Planner App is loaded, the Weather Widget will automatically determine the user's location using geolocation. If geolocation is available and permission is granted, the widget will display the current weather and forecast for the user's location. If geolocation is not available or permission is denied, the widget will fall back to a default city (Lagos, in this case) to display weather information.
+
+2. **City Selection**: To view weather information for a specific city, the user can interact with the Planner App's user interface to select a city from a dropdown menu or search for a city using a search box. Once a city is selected, the widget will fetch and display the current weather and forecast for the chosen location.
+
+3. **Weather Details**: The Weather Widget provides various weather details for the selected location:
+   - **City Name and Date**: The widget displays the name of the city and the current date.
+   - **Temperature**: The current temperature in Celsius is shown, along with an icon representing the weather conditions.
+   - **Weather Description**: A brief description of the current weather conditions is displayed.
+   - **Humidity**: The humidity percentage is shown, represented by a humidity icon.
+   - **Wind Speed**: The wind speed in meters per second is displayed, along with a wind icon.
+   - **Air Pressure**: The air pressure in hectopascals (hPa) is shown, represented by a pressure icon.
+
+4. **Three-Day Forecast**: The widget also provides a three-day forecast for the selected location. The forecast includes the date, an icon representing the weather conditions, and the temperature in Celsius for each of the next three days.
+
 
 ## How the Code Works:
 - **Weather Data Fetching:**
