@@ -5,13 +5,12 @@ const WeatherWidget = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState(null);
   const API_KEY = 'ba579273e8c4667647311fe91e20585d';
-  const CITY_NAME = 'Lagos';
 
   useEffect(() => {
-    const fetchWeatherData = async () => {
+    const fetchWeatherData = async (latitude, longitude) => {
       try {
         const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&appid=${API_KEY}&units=metric`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
         );
         setWeatherData(response.data);
       } catch (error) {
@@ -19,10 +18,10 @@ const WeatherWidget = () => {
       }
     };
 
-    const fetchForecastData = async () => {
+    const fetchForecastData = async (latitude, longitude) => {
       try {
         const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/forecast?q=${CITY_NAME}&appid=${API_KEY}&units=metric`
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
         );
         const forecastList = response.data.list;
         const nextThreeDays = forecastList.filter((item) => {
@@ -36,113 +35,39 @@ const WeatherWidget = () => {
       }
     };
 
-    fetchWeatherData();
-    fetchForecastData();
+    const handleLocationSuccess = (position) => {
+      const { latitude, longitude } = position.coords;
+      fetchWeatherData(latitude, longitude);
+      fetchForecastData(latitude, longitude);
+    };
+
+    const handleLocationError = (error) => {
+      console.error('Error getting user location:', error);
+    };
+
+    navigator.geolocation.getCurrentPosition(handleLocationSuccess, handleLocationError);
   }, []);
 
   const getWeatherIconUrl = (iconCode) => {
     return `http://openweathermap.org/img/w/${iconCode}.png`;
   };
 
-  const styles = {
-    weatherWidget: {
-      backgroundColor: '#1f253d',
-      padding: '10px',
-      borderRadius: '10px',
-      boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-      maxWidth: '300px',
-      margin: '0 auto',
-    },
-    currentWeather: {
-      marginBottom: '20px',
-    },
-    city: {
-      fontSize: '24px',
-      fontWeight: 'bold',
-      marginBottom: '10px',
-      color: '#f5f5f5',
-    },
-    weatherDetails: {
-      display: 'flex',
-      alignItems: 'center',
-      flexDirection: 'column',
-      // textAlign: 'center',
-      flex: '1',
-    },
-    weatherDetailsTemp: {
-      display: 'flex',
-      alignItems: 'center',
-      flexDirection: 'row',
-      justifyItems: 'space-around',
-      // textAlign: 'center',
 
-      flex: '1',
-    },
-    weatherIcon: {
-      width: '50px',
-      height: '50px',
-      marginRight: '10px',
-    },
-    temperature: {
-      fontSize: '36px',
-      fontWeight: 'bold',
-      color: '#f5f5f5',
-    },
-    temperatureValue: {
-      marginRight: '5px',
-    },
-    temperatureUnit: {
-      fontSize: '24px',
-      color: '#D5CA0A',
-    },
-    humidity: {
-      marginLeft: '20px',
-      fontSize: '18px',
-      color: '#f5f5f5',
-    },
-    humidityLabel: {
-      fontWeight: 'bold',
-      marginRight: '5px',
-      color: '#f5f5f5',
-    },
-    forecast: {
-      marginTop: '10px',
-    },
-    forecastHeading: {
-      fontSize: '18px',
-      fontWeight: 'bold',
-      marginBottom: '10px',
-      color: '#f5f5f5',
-    },
-    forecastContainer: {
-      display: 'flex',
-      justifyContent: 'space-between',
-    },
-    forecastItem: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      textAlign: 'center',
-      flex: '1',
-    },
-    forecastDay: {
-      fontSize: '14px',
-      marginBottom: '5px',
-    },
-    forecastIcon: {
-      width: '30px',
-      height: '30px',
-    },
-    forecastTemperature: {
-      fontSize: '14px',
-    },
-  };
+  
 
   return (
     <div style={styles.weatherWidget}>
       {weatherData ? (
         <div style={styles.currentWeather}>
           <h2 style={styles.city}>{weatherData.name}</h2>
+          <span style={styles.date}>
+          {new Date().toLocaleDateString('en-US', {
+            weekday: 'long',
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+          })}
+          </span>
           <div style={styles.weatherDetails}>
             <div style={styles.weatherDetailsTemp}>
               <img
@@ -157,16 +82,21 @@ const WeatherWidget = () => {
                 <span style={styles.temperatureUnit}>°C</span>
               </div>
             </div>
-            <div style={styles.weatherDetailsTemp}>
-              <div style={styles.humidity}>
-                {/* <img src="planner-app/src/humidity2.png"/> */}
-                <span style={styles.windSpeedLabel}>Humidity:</span>
-                <span>{weatherData.main.humidity}%</span>
+            <p style={styles.temperatureDesc}>{weatherData.weather[0].description}</p>
+            <div style={styles.weatherDetailsOther}>
+              <div>
+                {/* <i src="./drop.png"/> */}
+                <span style={styles.weatherOther}>Humidity: </span>
+                <span style={styles.humidityLabel}>{weatherData.main.humidity}%</span>
               </div>
-              <div style={styles.windSpeed}>
-                <span style={styles.windSpeedLabel}>Wind Speed:</span>
-                <span>{weatherData.wind.speed} m/s</span>
+              <div>
+                <span style={styles.weatherOther}>Wind Speed: </span>
+                <span style={styles.windLabel}>{weatherData.wind.speed}m/s</span>
               </div>
+            </div>
+            <div>
+              <span style={styles.weatherOther}>Air Pressure: </span>
+              <span style={styles.windLabel}>{weatherData.main.pressure} hPa</span>
             </div>
           </div>
         </div>
@@ -208,3 +138,126 @@ const WeatherWidget = () => {
 };
 
 export default WeatherWidget;
+
+const styles = {
+  weatherWidget: {
+    backgroundColor: '#1f253d',
+    padding: '10px',
+    borderRadius: '10px',
+    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+    width: '300px',
+    margin: '0 auto',
+    fontFamily: 'Poppins, sans-serif',
+  },
+  currentWeather: {
+    marginBottom: '20px',
+  },
+  city: {
+    fontSize: '26px',
+    fontWeight: 'bold',
+    // marginBottom: '2px',
+    color: '#f5f5f5',
+  },
+  date: {
+    fontSize: '14px',
+    fontWeight: '600',
+    marginBottom: '10px',
+    color: '#EBCA08',
+  },
+  weatherDetails: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    // textAlign: 'center',
+    flex: '1',
+  },
+  weatherIcon: {
+    width: '50px',
+    height: '50px',
+    marginRight: '10px',
+  },
+  temperature: {
+    fontSize: '36px',
+    fontWeight: 'bold',
+    color: '#f5f5f5',
+  },
+  temperatureValue: {
+    marginRight: '5px',
+  },
+  temperatureUnit: {
+    fontSize: '24px',
+    color: '#f5f5f5',
+  },
+  temperatureDesc: {
+    fontSize: '20px',
+    fontWeight: 'medium',
+    marginBottom: '10px',
+    color: '#f5f5f5',
+    alignText: 'center',
+  },
+  weatherDetailsTemp: {
+    display: 'flex',
+    // alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    textAlign: 'center',
+    fontSize: '14px',
+    fontWeight: 'medium',
+    flex: '1',
+  },
+  weatherDetailsOther: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    textAlign: 'center',
+    // flex: '1',
+  },
+  weatherOther: {
+    fontSize: '13px',
+    fontWeight: '600',
+    color: '#E3E3E3',
+  },
+  humidityLabel: {
+    fontWeight: 'bold',
+    fontSize: '15px',
+    marginRight: '12px',
+    color: '#ffffff',
+  },
+  windLabel: {
+    fontSize: '15px',
+    fontWeight: 'bold',
+    color: '#ffffff',
+  },
+  forecast: {
+    marginTop: '10px',
+  },
+  forecastHeading: {
+    fontSize: '16px',
+    fontWeight: 'bold',
+    marginBottom: '10px',
+    color: '#EBCA08',
+  },
+  forecastContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  forecastItem: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+    flex: '1',
+  },
+  forecastDay: {
+    fontSize: '14px',
+    marginBottom: '5px',
+  },
+  forecastIcon: {
+    width: '30px',
+    height: '30px',
+  },
+  forecastTemperature: {
+    fontSize: '14px',
+  },
+};
