@@ -11,32 +11,32 @@
 --------------------------------------------------------
 The Weather Widget offers several advantages to users of the Planner App:
 
-- **Enhanced Planning**: Users can make more informed decisions and plan their activities effectively by considering the current weather conditions and forecasts.
-- **Seamless Integration**: The widget seamlessly integrates within the Planner App, providing a unified user experience without the need for switching between different applications or websites.
-- **Real-time Updates**: The widget automatically updates the weather information at regular intervals, ensuring that users have access to the latest data.
-- **Location Flexibility**: Users can easily switch between locations by selecting different cities from the dropdown menu or using the search feature.
-- **Visual Representation**: The weather icons used in the widget provide a visually appealing representation of the weather conditions, making it easy to grasp the information at a glance. Icons for temperature, humidity, wind speed, air pressure, and forecast provide comprehensive weather insights.
-- **User-friendly Interface**: The widget is designed with a clean and user-friendly interface, allowing users to view essential weather details such as temperature, description, humidity, wind speed, air pressure, and a concise forecast for the upcoming days. The information is presented in a visually appealing manner, enhancing the overall user experience.
+- `Enhanced Planning`: Users can make more informed decisions and plan their activities effectively by considering the current weather conditions and forecasts.
+- `Seamless Integration`: The widget seamlessly integrates within the Planner App, providing a unified user experience without the need for switching between different applications or websites.
+- `Real-time Updates`: The widget automatically updates the weather information at regular intervals, ensuring that users have access to the latest data.
+- `Location Flexibility`: Users can easily switch between locations by selecting different cities from the dropdown menu or using the search feature.
+- `Visual Representation`: The weather icons used in the widget provide a visually appealing representation of the weather conditions, making it easy to grasp the information at a glance. Icons for temperature, humidity, wind speed, air pressure, and forecast provide comprehensive weather insights.
+- `User-friendly Interface`: The widget is designed with a clean and user-friendly interface, allowing users to view essential weather details such as temperature, description, humidity, wind speed, air pressure, and a concise forecast for the upcoming days. The information is presented in a visually appealing manner, enhancing the overall user experience.
 
 By incorporating the Weather Widget into the Planner App, users can stay informed about the weather conditions that may impact their plans, enabling them to make adjustments and ensure a smooth and enjoyable planning experience.
 
 ## How to Use the Weather Widget
 
-- **Initial Display/Setup**: When the Planner App is loaded, the Weather Widget will automatically determine the user's location using geolocation. If geolocation is available and permission is granted, the widget will display the current weather and forecast for the user's location. If geolocation is not available or permission is denied, the widget will fall back to a default city (London, in this case) to display weather information.
+- `Initial Display/Setup`: When the Planner App is loaded, the Weather Widget will automatically determine the user's location using geolocation. If geolocation is available and permission is granted, the widget will display the current weather and forecast for the user's location. If geolocation is not available or permission is denied, the widget will fall back to a default city (London, in this case) to display weather information.
 
-- **City Selection**: To view weather information for a specific city, the user can interact with the Planner App's user interface to select a city from a dropdown menu or search for a city using a search box. Once a city is selected, the widget will fetch and display the current weather and forecast for the chosen location.
+- `City Selection`: To view weather information for a specific city, the user can interact with the Planner App's user interface to select a city from a dropdown menu or search for a city using a search box. Once a city is selected, the widget will fetch and display the current weather and forecast for the chosen location.
 
-- **Weather Details**: The Weather Widget provides various weather details for the selected location:
-   - **City Name and Date**: The widget displays the name of the city and the current date.
-   - **Temperature**: The current temperature in Celsius (°C) is shown, along with an icon representing the weather conditions.
-   - **Weather Description**: A brief description of the current weather conditions is displayed.
-   - **Humidity**: The humidity percentage is shown, represented by a humidity icon.
-   - **Wind Speed**: The wind speed in meters per second is displayed, along with a wind icon.
-   - **Air Pressure**: The air pressure in hectopascals (hPa) is shown, represented by a pressure icon.
+- `Weather Details`: The Weather Widget provides various weather details for the selected location:
+   - `City Name and Date`: The widget displays the name of the city and the current date.
+   - `Temperature`: The current temperature in Celsius (°C) is shown, along with an icon representing the weather conditions.
+   - `**Weather Description**`: A brief description of the current weather conditions is displayed.
+   - `Humidity`: The humidity percentage is shown, represented by a humidity icon.
+   - `Wind Speed`: The wind speed in meters per second is displayed, along with a wind icon.
+   - `Air Pressure`: The air pressure in hectopascals (hPa) is shown, represented by a pressure icon.
 
-- **Three-Day Forecasts**: The widget also provides a three-day forecast for the selected location. The forecast includes the date, an icon representing the weather conditions, and the temperature in Celsius (°C) for each of the next three days.
+- `Three-Day Forecasts`: The widget also provides a three-day forecast for the selected location. The forecast includes the date, an icon representing the weather conditions, and the temperature in Celsius (°C) for each of the next three days.
 
-- **Interaction**: Users can interact with the Weather Widget by simply viewing the weather information and forecast. No explicit actions or inputs are required to retrieve the data. The widget automatically refreshes the weather information periodically to ensure the data remains up to date.
+- `Interaction`: Users can interact with the Weather Widget by simply viewing the weather information and forecast. No explicit actions or inputs are required to retrieve the data. The widget automatically refreshes the weather information periodically to ensure the data remains up to date.
 
 ```Note```: The Weather Widget requires an `internet connection` to fetch weather information from the `OpenWeatherMap API`.
 
