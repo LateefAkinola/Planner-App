@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkerAlt, faTint, faWind, faCompressArrowsAlt } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 const WeatherWidget = () => {
@@ -98,15 +98,18 @@ const WeatherWidget = () => {
             <p style={styles.temperatureDesc}>{weatherData.weather[0].description}</p>
             <div style={styles.weatherDetailsOther}>
               <div>
+                <FontAwesomeIcon icon={faTint} style={styles.weatherIconOther} />
                 <span style={styles.weatherOther}>Humidity: </span>
                 <span style={styles.humidityLabel}>{weatherData.main.humidity}%</span>
               </div>
               <div>
+                <FontAwesomeIcon icon={faCompressArrowsAlt} style={styles.weatherIconOther} />
                 <span style={styles.weatherOther}>Wind Speed: </span>
                 <span style={styles.windLabel}>{weatherData.wind.speed}m/s</span>
               </div>
             </div>
             <div>
+              <FontAwesomeIcon icon={faWind} style={styles.weatherIconOther} />
               <span style={styles.weatherOther}>Air Pressure: </span>
               <span style={styles.windLabel}>{weatherData.main.pressure} hPa</span>
             </div>
@@ -191,13 +194,18 @@ const styles = {
     height: '50px',
     marginRight: '10px',
   },
+  weatherIconOther: {
+    width: '14px',
+    height: '14px',
+    marginRight: '5px',
+  },
   temperature: {
     fontSize: '36px',
     fontWeight: 'bold',
     color: '#f5f5f5',
   },
   temperatureValue: {
-    marginRight: '5px',
+    marginRight: '3px',
   },
   temperatureUnit: {
     fontSize: '24px',
