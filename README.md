@@ -1,6 +1,7 @@
 
 # Weather Widget in the Planner App
 Tasked to create a custom widget in addition to an existing planner App
+![Capture11](https://github.com/LateefAkinola/Planner-App/assets/105966848/c2ecc140-0772-4267-bd6c-5feef56e33e9)
 
 ![Screenshot (377)](https://github.com/LateefAkinola/Planner-App/assets/105966848/f69d7cd8-4f67-44d1-8c2a-5c6d1b378bdd)
 ## Why add a Weather Widget in the Planner App?
