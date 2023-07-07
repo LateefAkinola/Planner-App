@@ -85,7 +85,6 @@ const WeatherWidget = () => {
             <p style={styles.temperatureDesc}>{weatherData.weather[0].description}</p>
             <div style={styles.weatherDetailsOther}>
               <div>
-                {/* <i src="./drop.png"/> */}
                 <span style={styles.weatherOther}>Humidity: </span>
                 <span style={styles.humidityLabel}>{weatherData.main.humidity}%</span>
               </div>
