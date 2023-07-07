@@ -6,54 +6,62 @@ const WeatherWidget = () => {
   const [forecastData, setForecastData] = useState(null);
   const API_KEY = 'ba579273e8c4667647311fe91e20585d';
 
+  const fetchWeatherData = async (latitude, longitude) => {
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
+      );
+      setWeatherData(response.data);
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+    }
+  };
+
+  const fetchForecastData = async (latitude, longitude) => {
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
+      );
+      const forecastList = response.data.list;
+      const nextThreeDays = forecastList.filter((item) => {
+        const forecastDate = new Date(item.dt_txt);
+        const isNextThreeDays = forecastDate.getDate() !== new Date().getDate();
+        return isNextThreeDays && forecastDate.getHours() === 12;
+      }).slice(0, 3);
+      setForecastData(nextThreeDays);
+    } catch (error) {
+      console.error('Error fetching forecast data:', error);
+    }
+  };
+
+  const handleLocationSuccess = (position) => {
+    const { latitude, longitude } = position.coords;
+    fetchWeatherData(latitude, longitude);
+    fetchForecastData(latitude, longitude);
+  };
+
+  const handleLocationError = (error) => {
+    console.error('Error getting user location:', error);
+  };
+
   useEffect(() => {
-    const fetchWeatherData = async (latitude, longitude) => {
-      try {
-        const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
-        );
-        setWeatherData(response.data);
-      } catch (error) {
-        console.error('Error fetching weather data:', error);
-      }
-    };
-
-    const fetchForecastData = async (latitude, longitude) => {
-      try {
-        const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
-        );
-        const forecastList = response.data.list;
-        const nextThreeDays = forecastList.filter((item) => {
-          const forecastDate = new Date(item.dt_txt);
-          const isNextThreeDays = forecastDate.getDate() !== new Date().getDate();
-          return isNextThreeDays && forecastDate.getHours() === 12;
-        }).slice(0, 3);
-        setForecastData(nextThreeDays);
-      } catch (error) {
-        console.error('Error fetching forecast data:', error);
-      }
-    };
-
-    const handleLocationSuccess = (position) => {
-      const { latitude, longitude } = position.coords;
-      fetchWeatherData(latitude, longitude);
-      fetchForecastData(latitude, longitude);
-    };
-
-    const handleLocationError = (error) => {
-      console.error('Error getting user location:', error);
-    };
-
+    // Fetch initial weather and forecast data
     navigator.geolocation.getCurrentPosition(handleLocationSuccess, handleLocationError);
+
+    // Set up periodic data refresh
+    const refreshInterval = setInterval(() => {
+      navigator.geolocation.getCurrentPosition(handleLocationSuccess, handleLocationError);
+    }, 30000); // Refresh every 30 seconds (adjust as needed)
+
+    // Clear the refresh interval when the component unmounts
+    return () => {
+      clearInterval(refreshInterval);
+    };
   }, []);
 
   const getWeatherIconUrl = (iconCode) => {
     return `http://openweathermap.org/img/w/${iconCode}.png`;
   };
-
-
-  
 
   return (
     <div style={styles.weatherWidget}>
