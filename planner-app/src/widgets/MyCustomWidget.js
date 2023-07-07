@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt, faTint, faWind, faCompressArrowsAlt } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkerAlt, faTint, faWind, faCompass } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 const WeatherWidget = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState(null);
   const API_KEY = 'ba579273e8c4667647311fe91e20585d';
+  const DEFAULT_CITY = 'London';
 
   const fetchWeatherData = async (latitude, longitude) => {
     try {
@@ -44,11 +45,20 @@ const WeatherWidget = () => {
 
   const handleLocationError = (error) => {
     console.error('Error getting user location:', error);
+    // Fallback to default city (London) if geolocation is not available
+    fetchWeatherData(DEFAULT_CITY);
+    fetchForecastData(DEFAULT_CITY);
   };
 
   useEffect(() => {
-    // Fetch initial weather and forecast data
-    navigator.geolocation.getCurrentPosition(handleLocationSuccess, handleLocationError);
+    // Fetch initial weather and forecast data using geolocation
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(handleLocationSuccess, handleLocationError);
+    } else {
+      // Fallback to default city (London) if geolocation is not supported
+      fetchWeatherData(DEFAULT_CITY);
+      fetchForecastData(DEFAULT_CITY);
+    }
 
     // Set up periodic data refresh
     const refreshInterval = setInterval(() => {
@@ -103,13 +113,13 @@ const WeatherWidget = () => {
                 <span style={styles.humidityLabel}>{weatherData.main.humidity}%</span>
               </div>
               <div>
-                <FontAwesomeIcon icon={faCompressArrowsAlt} style={styles.weatherIconOther} />
+                <FontAwesomeIcon icon={faWind} style={styles.weatherIconOther} />
                 <span style={styles.weatherOther}>Wind Speed: </span>
                 <span style={styles.windLabel}>{weatherData.wind.speed}m/s</span>
               </div>
             </div>
             <div>
-              <FontAwesomeIcon icon={faWind} style={styles.weatherIconOther} />
+              <FontAwesomeIcon icon={faCompass} style={styles.weatherIconOther} />
               <span style={styles.weatherOther}>Air Pressure: </span>
               <span style={styles.windLabel}>{weatherData.main.pressure} hPa</span>
             </div>
@@ -122,7 +132,7 @@ const WeatherWidget = () => {
 
       {forecastData ? (
         <div style={styles.forecast}>
-          <h3 style={styles.forecastHeading}>Forecast</h3>
+          <h3 style={styles.forecastHeading}>Forecasts</h3>
           <div style={styles.forecastContainer}>
             {forecastData.map((forecast, index) => (
               <div key={index} style={styles.forecastItem}>
@@ -160,7 +170,7 @@ const styles = {
     padding: '10px',
     borderRadius: '10px',
     boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-    width: '300px',
+    width: '320px',
     margin: '0 auto',
     fontFamily: 'Poppins, sans-serif',
   },
@@ -173,7 +183,6 @@ const styles = {
   city: {
     fontSize: '26px',
     fontWeight: 'bold',
-    // marginBottom: '2px',
     color: '#f5f5f5',
   },
   date: {
@@ -186,7 +195,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
-    // textAlign: 'center',
+    textAlign: 'center',
     flex: '1',
   },
   weatherIcon: {
@@ -220,7 +229,7 @@ const styles = {
   },
   weatherDetailsTemp: {
     display: 'flex',
-    // alignItems: 'center',
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     textAlign: 'center',
@@ -234,7 +243,7 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     textAlign: 'center',
-    // flex: '1',
+    flex: '1',
   },
   weatherOther: {
     fontSize: '13px',
