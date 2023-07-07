@@ -29,7 +29,7 @@ By incorporating the Weather Widget into the Planner App, users can stay informe
 - `Weather Details`: The Weather Widget provides various weather details for the selected location:
    - `City Name and Date`: The widget displays the name of the city and the current date.
    - `Temperature`: The current temperature in Celsius (°C) is shown, along with an icon representing the weather conditions.
-   - `**Weather Description**`: A brief description of the current weather conditions is displayed.
+   - `Weather Description`: A brief description of the current weather conditions is displayed.
    - `Humidity`: The humidity percentage is shown, represented by a humidity icon.
    - `Wind Speed`: The wind speed in meters per second is displayed, along with a wind icon.
    - `Air Pressure`: The air pressure in hectopascals (hPa) is shown, represented by a pressure icon.
