@@ -2,7 +2,7 @@
 
 - **Weather Data Fetching:**
   - The `fetchWeatherData` function is responsible for fetching the current weather data from the ``OpenWeatherMap API``.
-  - It takes in the `latitude` and `longitude` parameters, which are obtained either from the user's geolocation or the default city (Lagos).
+  - It takes in the `latitude` and `longitude` parameters, which are obtained either from the user's geolocation.
   - Inside the function, an asynchronous Axios GET request is made to the ``OpenWeatherMap API`` endpoint by passing the provided `API key`, `latitude`, and `longitude` as query parameters. 
   - If the request is successful, the weather data is extracted from the `response.data` property and stored in the `weatherData` state using the `setWeatherData` function.
   - If there is an error during the request, the error is logged to the console using `console.error`.
