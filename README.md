@@ -28,7 +28,7 @@ The Weather Widget offers several advantages to users of the Planner App:
 
 ## How to Use the Weather Widget
 
-- `Initial Display/Setup`: When the Planner App is loaded, the Weather Widget will automatically determine the user's location using geolocation. If geolocation is available and permission is granted, the widget will display the current weather and forecast for the user's location. If geolocation is not available or permission is denied, the widget will fall back to a default city (London, in this case) to display weather information.
+- `Initial Display/Setup`: When the Planner App is loaded, the Weather Widget will automatically determine the user's location using geolocation. If geolocation is available, and `permission is granted to access the device location`, the widget will display the current weather and forecast for the user's location. If geolocation is not available or permission is denied, the widget will fall back to a default city (London, in this case) to display weather information.
 
 - `Weather Details`: The Weather Widget provides various weather details for the selected location:
     - `City Name and Date`: The widget displays the name of the city and the current date.
